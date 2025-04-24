@@ -17,12 +17,16 @@ class StringCalculator
     # Check for custom delimiter syntax at the start: "//[delimiter]\n"
     if numbers.start_with?("//")
       delimiter_line, number_string = numbers.split("\n", 2) # Split into delimiter part and number string
-      if delimiter_line.match?(/\[.*\]/) # Check for delimiter format //[...]
-        custom_delimiter = delimiter_line[/\[(.*)\]/, 1] # Extract value inside brackets
+
+      delimiters = delimiter_line.scan(/\[(.*?)\]/).flatten
+      if delimiters.any?
+        regex_pattern = delimiters.map { |d| Regexp.escape(d) }.join('|') # "1***2$$3" like "\\*\\*\\*|\\$\\$"
+        [regex_pattern, number_string]
       else
+        # Single character delimiter without brackets
         custom_delimiter = delimiter_line[2..] # Extract delimiter after '//'
+        [Regexp.escape(custom_delimiter), number_string] # Escape special regex chars, Remaining number string
       end
-      [Regexp.escape(custom_delimiter), number_string] # Escape special regex chars, Remaining number string
     else
       # Default delimiters: comma or newline
       [',|\n', numbers]
