@@ -17,7 +17,11 @@ class StringCalculator
     # Check for custom delimiter syntax at the start: "//[delimiter]\n"
     if numbers.start_with?("//")
       delimiter_line, number_string = numbers.split("\n", 2) # Split into delimiter part and number string
-      custom_delimiter = delimiter_line[2..] # Extract delimiter after '//'
+      if delimiter_line.match?(/\[.*\]/) # Check for delimiter format //[...]
+        custom_delimiter = delimiter_line[/\[(.*)\]/, 1] # Extract value inside brackets
+      else
+        custom_delimiter = delimiter_line[2..] # Extract delimiter after '//'
+      end
       [Regexp.escape(custom_delimiter), number_string] # Escape special regex chars, Remaining number string
     else
       # Default delimiters: comma or newline
