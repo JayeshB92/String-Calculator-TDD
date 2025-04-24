@@ -14,4 +14,10 @@ RSpec.describe StringCalculator do
     # Test when input is a single number as string
     expect(calc.add("1")).to eq(1)
   end
+
+  it 'returns sum for two comma-separated numbers' do
+    calc = StringCalculator.new
+    # Test when input is two numbers separated by comma
+    expect(calc.add("1,5")).to eq(6)
+  end
 end
