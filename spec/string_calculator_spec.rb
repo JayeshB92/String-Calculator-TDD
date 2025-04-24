@@ -20,4 +20,10 @@ RSpec.describe StringCalculator do
     # Test when input is two numbers separated by comma
     expect(calc.add("1,5")).to eq(6)
   end
+
+  it 'returns sum for multiple comma-separated numbers' do
+    calc = StringCalculator.new
+    # Test with more than two numbers
+    expect(calc.add("1,2,3,4,5")).to eq(15)
+  end
 end
