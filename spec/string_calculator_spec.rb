@@ -8,4 +8,10 @@ RSpec.describe StringCalculator do
       expect(calc.add("")).to eq(0)
     end
   end
+
+  it 'returns the number for a single number string' do
+    calc = StringCalculator.new
+    # Test when input is a single number as string
+    expect(calc.add("1")).to eq(1)
+  end
 end
