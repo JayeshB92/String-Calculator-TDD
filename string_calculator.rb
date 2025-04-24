@@ -4,7 +4,9 @@ class StringCalculator
     return 0 if numbers.empty? # If the input string is empty, return 0
 
     delimiter, number_string = parse_delimiter(numbers)
-    split_numbers(number_string, delimiter).sum
+    number_list = split_numbers(number_string, delimiter)
+    check_for_negatives(number_list)
+    number_list.sum
   end
 
   private
@@ -26,5 +28,13 @@ class StringCalculator
   # Splits the number string using the given delimiter and converts to integers
   def split_numbers(number_string, delimiter)
     number_string.split(/#{delimiter}/).map(&:to_i)
+  end
+
+  # Checks for negative numbers and raises an exception if found
+  def check_for_negatives(numbers)
+    negatives = numbers.select { |n| n < 0 }
+    unless negatives.empty?
+      raise ArgumentError, "negative numbers not allowed #{negatives.join(',')}"
+    end
   end
 end
