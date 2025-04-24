@@ -1,3 +1,5 @@
+require_relative '../string_calculator' # Load the StringCalculator class
+
 RSpec.describe StringCalculator do
   describe '#add' do
     it 'returns 0 for an empty string' do
