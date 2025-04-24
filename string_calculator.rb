@@ -6,7 +6,7 @@ class StringCalculator
     delimiter, number_string = parse_delimiter(numbers)
     number_list = split_numbers(number_string, delimiter)
     check_for_negatives(number_list)
-    number_list.sum
+    number_list.reject { |n| n > 1000 }.sum
   end
 
   private
