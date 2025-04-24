@@ -5,7 +5,7 @@ class StringCalculator
     # If the input string is empty, return 0
     return 0 if numbers.empty?
 
-    # convert to integer and return
-    numbers.to_i
+    # Split the string by commas, convert each part to integer, and sum them
+    numbers.split(',').map(&:to_i).sum
   end
 end
