@@ -51,8 +51,19 @@ RSpec.describe StringCalculator do
     end
 
     it 'supports custom delimiters of any length' do
+      # custom delimiter as in “//[delimiter]\n”
       expect(calc.add("//[***]\n1***2***3")).to eq(6)
       expect(calc.add("//[abc]\n1abc2abc3")).to eq(6)
+    end
+
+    it 'supports multiple single-character delimiters' do
+      # custom delimiter as in “//[delim1][delim2]\n”
+      expect(calc.add("//[*][%]\n1*2%3")).to eq(6)
+    end
+
+    it 'supports multiple delimiters of any length' do
+      # custom delimiter as in “//[delim1][delim2]\n”
+      expect(calc.add("//[***][%%]\n1***2%%3")).to eq(6)
     end
   end
 end
