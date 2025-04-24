@@ -5,8 +5,8 @@ class StringCalculator
     # If the input string is empty, return 0
     return 0 if numbers.empty?
 
-    # Split the comma-separated string 'numbers' into an array of strings
-    array_of_strings = numbers.split(',')
+    # Split the string 'numbers' by commas OR newlines using regex into an array of strings
+    array_of_strings = numbers.split(/,|\n/)
 
     # Convert each string in the array to an integer and calculate the total sum
     # Using 'inject' to iterate through the array and accumulate the sum
